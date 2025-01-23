@@ -1,7 +1,8 @@
 from pyrogram.types import Message
 
 from pyrogram import filters
-from src.database.models import async_session, User
+from src.database.conn import async_session
+from src.database.models import User
 from sqlalchemy import select
 
 

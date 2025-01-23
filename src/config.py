@@ -1,6 +1,6 @@
 from dotenv import dotenv_values
 
-config = dotenv_values("../.env")
+config = dotenv_values(".env")
 
 API_ID = config['API_ID']
 API_HASH = config['API_HASH']
