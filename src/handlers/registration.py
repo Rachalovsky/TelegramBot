@@ -39,7 +39,7 @@ class Registration(StatesGroup):
 
     async def on_name_set(self, value: str) -> None:
         if not self.validate_name(value):
-            raise ValueError("Название задачи не должно превышать 25 символов.")
+            raise ValueError("Имя не должно превышать 25 символов.")
 
     async def on_login_set(self, value: str) -> None:
         if not self.validate_login(value):
