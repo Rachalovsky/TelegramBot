@@ -21,6 +21,7 @@ env.bak/
 
 # Pyrogram specific
 *.session
+*.session-journal
 my_account.session
 
 # IDE and editor files
