@@ -1,4 +1,5 @@
 from sqlalchemy import select, delete
+
 from src.database.conn import async_session
 from src.database.models import User, Task
 
@@ -49,7 +50,6 @@ async def add_task(task_data: dict) -> None:
         await session.commit()
 
 
-
 async def get_all_tasks_list(tg_id: int) -> list[Task]:
     """
     Получает список всех задач пользователя по его идентификатору в Telegram.
@@ -66,7 +66,6 @@ async def get_all_tasks_list(tg_id: int) -> list[Task]:
             select(Task).where(Task.owner_id == user_subquery).order_by(Task.is_done)
         )
         return result
-
 
 
 async def get_completed_tasks_list(tg_id: int) -> list[Task]:
@@ -158,7 +157,6 @@ async def delete_completed_tasks(tg_id: int) -> None:
     """
     async with async_session() as session:
         async with session.begin():
-
             completed_tasks = await get_completed_tasks_list(tg_id)
             completed_tasks_id = [task.id for task in completed_tasks]
 

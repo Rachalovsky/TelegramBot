@@ -1,9 +1,9 @@
-from pyrogram.types import Message
-
 from pyrogram import filters
+from pyrogram.types import Message
+from sqlalchemy import select
+
 from src.database.conn import async_session
 from src.database.models import User
-from sqlalchemy import select
 
 
 async def check_register_user(_, __, m: Message) -> bool:
