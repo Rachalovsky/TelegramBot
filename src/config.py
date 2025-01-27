@@ -1,6 +1,6 @@
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = dotenv_values(".env.docker")
 
 API_ID = config['API_ID']
 API_HASH = config['API_HASH']
@@ -9,8 +9,8 @@ TG_TOKEN = config['TG_TOKEN']
 
 DATABASE_URL = config['DATABASE_URL']
 
-PG_USER = config['PG_USER']
-PG_PASSWORD = config['PG_PASSWORD']
-PG_DATABASE = config['PG_DATABASE']
-PG_HOST = config['PG_HOST']
-PG_PORT = config['PG_PORT']
+POSTGRES_USER = config['POSTGRES_USER']
+POSTGRES_PASSWORD = config['POSTGRES_PASSWORD']
+POSTGRES_DATABASE = config['POSTGRES_DATABASE']
+POSTGRES_HOST = config['POSTGRES_HOST']
+POSTGRES_PORT = config['POSTGRES_PORT']
