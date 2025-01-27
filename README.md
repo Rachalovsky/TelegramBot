@@ -59,7 +59,6 @@ docker-compose ps
 Bot/
 ├── src/
 │   ├── config.py
-│   └── main.py
 │   ├── database/
 │   │   ├── conn.py
 │   │   ├── models.py
