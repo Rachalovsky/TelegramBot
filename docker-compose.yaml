@@ -19,8 +19,7 @@ services:
     volumes:
       - .:/app
     command: ["python", "main.py"]
-#    command: ["ls", "-R", "/app"]
-#    command: python main.py
+
 volumes:
   db_data:
 
