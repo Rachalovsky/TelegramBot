@@ -1,6 +1,6 @@
 from typing import List
 from datetime import datetime
-from sqlalchemy import BigInteger, String, ForeignKey, Boolean, DateTime
+from sqlalchemy import BigInteger, String, ForeignKey, Boolean, DateTime, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs
 
@@ -50,6 +50,10 @@ class User(Base):
                                                 onupdate=datetime.now())
 
     tasks: Mapped[List["Task"]] = relationship("Task", back_populates="owner", cascade="all, delete-orphan")
+
+    __table_args__ = (
+        Index('idx_tg_id', 'tg_id', postgresql_using='hash'),
+    )
 
 
 class Task(Base):
