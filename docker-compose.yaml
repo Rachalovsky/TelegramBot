@@ -1,0 +1,26 @@
+services:
+  postgres_db:
+    image: postgres:16
+    container_name: postgres_db
+    env_file:
+      - .env.docker
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  bot:
+    build: .
+    container_name: bot_container
+    depends_on:
+      - postgres_db
+    env_file:
+      - .env.docker
+    volumes:
+      - .:/app
+    command: ["python", "main.py"]
+#    command: ["ls", "-R", "/app"]
+#    command: python main.py
+volumes:
+  db_data:
+
