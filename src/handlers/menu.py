@@ -1,14 +1,13 @@
 from pyrogram import filters, Client
 from pyrogram.types import Message, CallbackQuery
 from pyrogram_patch.router import Router
-from src.tools.filters import is_register_user
-
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 from src.tools.keyboards import MAIN_MENU
+from src.tools.filters import is_register_user
 from src.tools.other import is_done_task
 from src.database.requests import (get_all_tasks_list, get_actual_tasks_list, get_completed_tasks_list,
                                    delete_completed_tasks)
-
 
 menu_router = Router()
 
@@ -143,5 +142,3 @@ async def delete_completed_tasks_handler(client: Client, callback: CallbackQuery
     """
     await delete_completed_tasks(callback.from_user.id)
     await callback.answer("Выполненные задачи удалены ❌", show_alert=True)
-
-

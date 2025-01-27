@@ -6,4 +6,3 @@ DATABASE_URL = f"postgresql+asyncpg://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT
 
 engine = create_async_engine(DATABASE_URL)
 async_session = async_sessionmaker(engine)
-

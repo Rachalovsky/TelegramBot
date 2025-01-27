@@ -4,11 +4,11 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram_patch.fsm import StatesGroup, StateItem, State
 from pyrogram_patch.fsm.filter import StateFilter
-
 from pyrogram_patch.router import Router
+from sqlalchemy.exc import IntegrityError
+
 from src.database.requests import *
 from src.tools.filters import is_unregister_user
-from sqlalchemy.exc import IntegrityError
 
 reg_router = Router()
 
@@ -157,5 +157,3 @@ async def hint(client: Client, message: Message) -> None:
         - Отправляет подсказку для начала регистрации.
     """
     await client.send_message(message.from_user.id, "Для начала регистрации введите /start")
-
-

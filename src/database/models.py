@@ -21,6 +21,7 @@ class Base(AsyncAttrs, DeclarativeBase):
     """
     pass
 
+
 class User(Base):
     """
     Модель для таблицы пользователей.
@@ -82,7 +83,6 @@ class Task(Base):
     owner: Mapped["User"] = relationship("User", back_populates="tasks")
 
 
-
 async def create_bd_tables() -> None:
     """
     Асинхронно создает все таблицы базы данных, определенные в моделях SQLAlchemy.
@@ -93,5 +93,3 @@ async def create_bd_tables() -> None:
     """
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-
-

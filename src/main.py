@@ -1,16 +1,29 @@
 import asyncio
-
+import logging
 from pyrogram import Client
+from pyrogram.types import BotCommand
 from pyrogram_patch import patch
 from pyrogram_patch.fsm.storages import MemoryStorage
 
-import logging
-
-from config import API_ID, API_HASH, TG_TOKEN
-from handlers.registration import reg_router
-from handlers.menu import menu_router
-from handlers.tasks import task_router
+from src.config import API_ID, API_HASH, TG_TOKEN
+from src.handlers.registration import reg_router
+from src.handlers.menu import menu_router
+from src.handlers.tasks import task_router
+from src.handlers.bot_commands import bot_commands
 from src.database.models import create_bd_tables
+
+
+async def set_bot_commands(client: Client):
+    await client.set_bot_commands([
+        BotCommand("start", "Запустить менеджер задач"),
+        BotCommand("about", "Информация о боте"),
+        BotCommand("code", "Ссылка на GitHub")
+    ])
+
+
+def include_routers(patch_manager, *routers):
+    for router in routers:
+        patch_manager.include_router(router)
 
 
 async def main():
@@ -32,10 +45,9 @@ async def main():
     app = Client(name="ToDO_bot", api_id=API_ID, api_hash=API_HASH, bot_token=TG_TOKEN)
     patch_manager = patch(app)
     patch_manager.set_storage(MemoryStorage())
-    patch_manager.include_router(reg_router)
-    patch_manager.include_router(menu_router)
-    patch_manager.include_router(task_router)
+    include_routers(patch_manager, bot_commands, reg_router, menu_router, task_router)
     await app.start()
+    await set_bot_commands(app)
 
 
 if __name__ == "__main__":
@@ -50,5 +62,3 @@ if __name__ == "__main__":
         loop.stop()
     finally:
         print("Бот успешно остановлен. До новых встреч!")
-
-

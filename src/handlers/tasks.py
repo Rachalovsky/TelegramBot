@@ -2,8 +2,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery
 from pyrogram_patch.fsm import StatesGroup, StateItem, State
 from pyrogram_patch.fsm.filter import StateFilter
-
 from pyrogram_patch.router import Router
+
 from src.database.requests import *
 from src.tools.filters import is_register_user
 from src.tools.other import is_done_task
@@ -53,7 +53,7 @@ class CreateTask(StatesGroup):
            bool: True, если описание задачи валидно, иначе False.
        """
         if len(value) <= 250:
-            raise True
+            return True
         return False
 
     async def on_name_set(self, value: str) -> None:
@@ -223,7 +223,6 @@ async def mark_task_as_complete_handler(client: Client, callback: CallbackQuery)
 
     callback.data = f'task_{task_id}'
     await get_task_handler(client, callback)
-
 
 
 @task_router.on_callback_query(filters.regex(r'^delete_task_') & is_register_user)
